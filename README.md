@@ -1,46 +1,55 @@
 ````markdown
 # Document QA API
 
-A minimal Document-based Question Answering API built with FastAPI, FAISS, and OpenAI.
+A minimal **Document-based Question Answering API** built with **FastAPI**, **FAISS**, and **OpenAI**.
 
-## Features
+---
 
--   POST `/documents` to ingest documents (JSON or plaintext files)
--   GET `/documents` to list indexed documents
--   DELETE `/documents/{doc_id}` to remove a document and associated vectors
--   POST `/query` to ask a question; retrieves relevant chunks via FAISS and asks an LLM to answer
--   Health check endpoint `/health`
+## 🚀 Features
 
-## Requirements
+-   **POST** `/documents` → Ingest documents (JSON or plaintext files)
+-   **GET** `/documents` → List indexed documents
+-   **DELETE** `/documents/{doc_id}` → Remove a document and its associated vectors
+-   **POST** `/query` → Ask a question; retrieves relevant chunks via FAISS and generates an answer using OpenAI
+-   **GET** `/health` → Health check endpoint
 
--   Python 3.10+
--   OpenAI API key
+---
 
-## Setup
+## 🧩 Requirements
 
-1. Clone the repo (or copy files)
-2. Create a virtual environment and activate it
+-   Python **3.10+**
+-   **OpenAI API key**
 
-```bash
-python -m venv .venv
-source .venv/bin/activate  # windows: .venv\Scripts\activate
-pip install -r requirements.txt
-```
+---
+
+## ⚙️ Setup
+
+1. **Clone the repository** (or copy the files)
+2. **Create and activate a virtual environment**
+
+    ```bash
+    python -m venv .venv
+    source .venv/bin/activate  # On Windows: .venv\Scripts\activate
+    pip install -r requirements.txt
+    ```
 ````
 
-3. Create `.env` from `.env.example` and fill in your `OPENAI_API_KEY`
+3. **Create a `.env` file** from `.env.example` and add your `OPENAI_API_KEY`
 
-4. Run:
+4. **Run the application**
 
-```bash
-uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
-```
+    ```bash
+    uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
+    ```
 
-## Usage
+---
 
-### Index documents (JSON)
+## 📄 Usage
 
-POST `/documents` with body:
+### ➕ Index Documents (JSON)
+
+**POST** `/documents`
+Body example:
 
 ```json
 {
@@ -50,20 +59,57 @@ POST `/documents` with body:
 }
 ```
 
-### Query
+---
 
-POST `/query` with body:
+### ❓ Query
+
+**POST** `/query`
+Body example:
 
 ```json
-{ "question": "What is X?", "top_k": 5 }
+{
+	"question": "What is X?",
+	"top_k": 5
+}
 ```
 
-Response includes `answer` and `sources` (list of documents/chunks used).
+**Response** includes:
 
-## Files
+```json
+{
+	"answer": "Generated answer text...",
+	"sources": ["doc1_chunk_1", "doc1_chunk_2"]
+}
+```
 
--   `app/vector_store.py` manages FAISS index and metadata persistence in `./data/`
--   `app/utils.py` contains chunking and PDF/TXT/MD parsing
+---
+
+## 📁 Project Structure
+
+```
+app/
+│
+├── main.py                # FastAPI entry point
+├── vector_store.py        # Manages FAISS index & metadata in ./data/
+├── utils.py               # Chunking and file parsing (PDF, TXT, MD)
+└── ...
+```
+
+---
+
+## ✅ Health Check
+
+Visit:
+
+```
+GET /health
+```
+
+Response:
+
+```json
+{ "status": "ok" }
+```
 
 ```
 

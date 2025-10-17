@@ -1,4 +1,4 @@
-# Document QA API
+# Document Based QA API
 
 A minimal **Document-based Question Answering API** built with **FastAPI**, **FAISS**, and **OpenAI**.
 
@@ -6,11 +6,31 @@ A minimal **Document-based Question Answering API** built with **FastAPI**, **FA
 
 ## 🚀 Features
 
--   **POST** `/documents` → Ingest documents (JSON or plaintext files)
+-   **GET** `/docs` → Swagger generated API documentation
+-   **GET** `/health` → Health check endpoint
 -   **GET** `/documents` → List indexed documents
+-   **POST** `/documents` → Ingest documents (JSON or plaintext files)
 -   **DELETE** `/documents/{doc_id}` → Remove a document and its associated vectors
 -   **POST** `/query` → Ask a question; retrieves relevant chunks via FAISS and generates an answer using OpenAI
--   **GET** `/health` → Health check endpoint
+-   **POST** `/upload` → Upload and automatically index PDF, TXT, or Markdown files
+
+---
+
+## 📁 Project Structure
+
+```
+app/
+│
+├── main.py                # FastAPI entry point
+├── vector_store.py        # Manages FAISS index & metadata in ./data/
+├── utils.py               # Chunking and file parsing (PDF, TXT, MD)
+└── ...
+requirements.txt
+.env
+.gitignore
+myenv/
+README.md
+```
 
 ---
 
@@ -44,6 +64,46 @@ A minimal **Document-based Question Answering API** built with **FastAPI**, **FA
 ---
 
 ## 📄 Usage
+
+### 📝 API Docs
+
+Visit:
+
+```
+GET /docs
+```
+
+**Response:**
+
+Rendered HTML page to display all API endpoints
+
+---
+
+### ✅ Health Check
+
+Visit:
+
+```
+GET /health
+```
+
+**Response:**
+
+```json
+{ "status": "ok" }
+```
+
+---
+
+### 🗃️ Display Documents (JSON)
+
+**GET** `/documents`
+
+**Response:**
+
+List of all the submitted documents
+
+---
 
 ### ➕ Index Documents (JSON)
 
@@ -85,29 +145,41 @@ A minimal **Document-based Question Answering API** built with **FastAPI**, **FA
 
 ---
 
-## 📁 Project Structure
+### 🗂️ Upload Documents (File)
 
-```
-app/
-│
-├── main.py                # FastAPI entry point
-├── vector_store.py        # Manages FAISS index & metadata in ./data/
-├── utils.py               # Chunking and file parsing (PDF, TXT, MD)
-└── ...
-```
+**POST** `/upload`
 
----
+Upload a file (PDF, TXT, or Markdown) directly to the API.  
+The file will be automatically read, chunked, embedded, and indexed for semantic search and question answering.
 
-## ✅ Health Check
+**Form Data Example (using cURL):**
 
-Visit:
-
-```
-GET /health
+```bash
+curl -X POST "http://localhost:8000/upload" \
+  -F "file=@/path/to/document.pdf" \
+  -F "title=My PDF Document"
 ```
 
 **Response:**
 
 ```json
-{ "status": "ok" }
+{
+	"indexed_chunks": 12
+}
 ```
+
+**Notes:**
+
+-   The file is converted to text using appropriate readers:
+
+    -   `.pdf` → extracted using `read_pdf()`
+    -   `.md` / `.markdown` → parsed using `read_markdown()`
+    -   `.txt` → read using `read_text()`
+
+-   If the file format is unsupported, a clear error message is returned.
+-   Optional fields:
+
+    -   `title`: Custom document title (defaults to filename)
+    -   `doc_id`: Custom document ID (auto-generated if not provided)
+
+---

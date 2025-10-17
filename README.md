@@ -25,6 +25,7 @@ A minimal **Document-based Question Answering API** built with **FastAPI**, **FA
 ## ⚙️ Setup
 
 1. **Clone the repository** (or copy the files)
+
 2. **Create and activate a virtual environment**
 
     ```bash
@@ -32,7 +33,6 @@ A minimal **Document-based Question Answering API** built with **FastAPI**, **FA
     source .venv/bin/activate  # On Windows: .venv\Scripts\activate
     pip install -r requirements.txt
     ```
-````
 
 3. **Create a `.env` file** from `.env.example` and add your `OPENAI_API_KEY`
 
@@ -49,7 +49,8 @@ A minimal **Document-based Question Answering API** built with **FastAPI**, **FA
 ### ➕ Index Documents (JSON)
 
 **POST** `/documents`
-Body example:
+
+**Body example:**
 
 ```json
 {
@@ -58,13 +59,15 @@ Body example:
 	]
 }
 ```
+````
 
 ---
 
 ### ❓ Query
 
 **POST** `/query`
-Body example:
+
+**Body example:**
 
 ```json
 {
@@ -73,7 +76,7 @@ Body example:
 }
 ```
 
-**Response** includes:
+**Response:**
 
 ```json
 {
@@ -105,7 +108,7 @@ Visit:
 GET /health
 ```
 
-Response:
+**Response:**
 
 ```json
 { "status": "ok" }

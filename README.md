@@ -61,6 +61,12 @@ README.md
     uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
     ```
 
+5. **Test the application**
+
+    ```bash
+    pytest -v
+    ```
+
 ---
 
 ## 📄 Usage

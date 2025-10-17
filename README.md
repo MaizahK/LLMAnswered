@@ -1,4 +1,3 @@
-````markdown
 # Document QA API
 
 A minimal **Document-based Question Answering API** built with **FastAPI**, **FAISS**, and **OpenAI**.
@@ -59,6 +58,7 @@ A minimal **Document-based Question Answering API** built with **FastAPI**, **FA
 	]
 }
 ```
+
 ````
 
 ---
@@ -117,3 +117,5 @@ GET /health
 ```
 
 ```
+
+````

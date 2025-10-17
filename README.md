@@ -107,7 +107,11 @@ GET /health
 
 ### 🗃️ Display Documents (JSON)
 
-**GET** `/documents`
+Visit:
+
+```
+GET `/documents`
+```
 
 **Response:**
 
@@ -117,7 +121,11 @@ List of all the submitted documents
 
 ### ➕ Index Documents (JSON)
 
-**POST** `/documents`
+Visit:
+
+```
+POST `/documents`
+```
 
 **Body example:**
 
@@ -133,7 +141,11 @@ List of all the submitted documents
 
 ### ❓ Query
 
-**POST** `/query`
+Visit:
+
+```
+POST `/query`
+```
 
 **Body example:**
 
@@ -157,7 +169,11 @@ List of all the submitted documents
 
 ### 🗂️ Upload Documents (File)
 
-**POST** `/upload`
+Visit:
+
+```
+POST `/upload`
+```
 
 Upload a file (PDF, TXT, or Markdown) directly to the API.  
 The file will be automatically read, chunked, embedded, and indexed for semantic search and question answering.

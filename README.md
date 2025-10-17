@@ -59,8 +59,6 @@ A minimal **Document-based Question Answering API** built with **FastAPI**, **FA
 }
 ```
 
-````
-
 ---
 
 ### ❓ Query
@@ -118,4 +116,6 @@ GET /health
 
 ```
 
-````
+```
+
+```

@@ -25,6 +25,10 @@ app/
 ├── vector_store.py        # Manages FAISS index & metadata in ./data/
 ├── utils.py               # Chunking and file parsing (PDF, TXT, MD)
 └── ...
+tests/
+│
+├── test_app.py            # Unit tests to validate all endpoints
+└── ...
 requirements.txt
 .env
 .gitignore
